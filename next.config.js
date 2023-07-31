@@ -5,18 +5,21 @@ const nextConfig = {
   reactStrictMode: true,
   skipTrailingSlashRedirect: true,
   rewrites: async () => {
-    if (process.env.PROFILE === 'dev') {
-      try {
-        return JSON.parse(process.env.REWRITES_DEV);
-      } catch (e) {
-        return [];
-      }
-    } else {
-      try {
-        return JSON.parse(process.env.REWRITES_PROD);
-      } catch (e) {
-        return [];
-      }
+    try {
+      return process.env.PROFILE === 'dev'
+        ? JSON.parse(process.env.REWRITES_DEV)
+        : JSON.parse(process.env.REWRITES_PROD);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.warn('No environment variable for rewrites');
+      // eslint-disable-next-line no-console
+      console.log(
+        'Rewrites from env:',
+        process.env.PROFILE === 'dev'
+          ? JSON.parse(process.env.REWRITES_DEV)
+          : JSON.parse(process.env.REWRITES_PROD),
+      );
+      return [];
     }
   },
 };
