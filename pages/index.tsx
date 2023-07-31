@@ -42,6 +42,9 @@ const theme = createTheme({
       'sans-serif',
     ].join(','),
   },
+  shape: {
+    borderRadius: 2,
+  },
 }, zhCN);
 
 const UNDO_TIMEOUT = 5000;

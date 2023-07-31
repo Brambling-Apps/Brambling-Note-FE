@@ -64,8 +64,9 @@ export default function NotificationSnackbar({
       sx={[
         { bottom: 0 },
         (theme) => ({
-          [theme.breakpoints.down('xs')]: {
-            borderRadius: 0,
+          [theme.breakpoints.down('sm')]: {
+            left: 0,
+            right: 0,
           },
         }),
       ]}
@@ -75,15 +76,11 @@ export default function NotificationSnackbar({
       TransitionComponent={getTransition}
     >
       <SnackbarContent
-        sx={[
-          { borderRadius: 2 },
-          (theme) => ({
-            [theme.breakpoints.down('xs')]: {
-              left: 0,
-              right: 0,
-            },
-          }),
-        ]}
+        sx={(theme) => ({
+          [theme.breakpoints.down('sm')]: {
+            borderRadius: 0,
+          },
+        })}
         message={cachedMessage}
         action={cachedUndo ? (
           <Button
