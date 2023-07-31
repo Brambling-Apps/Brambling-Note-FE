@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import {
   Container, ThemeProvider, createTheme, Box, CssBaseline,
 } from '@mui/material';
@@ -161,7 +161,20 @@ export default function Home() {
   useEffect(() => {
     if (user !== null) {
       localStorage.setItem('user', JSON.stringify(user));
-      noteService.getAll().then((n) => setNotes(n));
+      noteService.getAll()
+        .then((n) => setNotes(n))
+        .catch((error: Error | AxiosError) => {
+          if (axios.isAxiosError(error)) {
+            // session is invalid
+            if (error.response?.status === 401) {
+              localStorage.removeItem('user');
+              setUser(null);
+            }
+          } else {
+            // TODO
+            throw error;
+          }
+        });
     } else {
       const cacheUser = localStorage.getItem('user');
 
