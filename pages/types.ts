@@ -5,8 +5,8 @@ interface BaseUser {
 
 export interface User extends BaseUser {
   id: string;
-  token: string;
   verified: boolean;
+  lastVerificationEmail: Date;
 }
 
 export interface NewUser extends BaseUser {
@@ -18,8 +18,6 @@ export interface NewPasswordUser {
   password: string;
   newPassword: string;
 }
-
-export type NewPassword = Omit<NewPasswordUser, 'email'>;
 
 export type LoginUser = Omit<NewUser, 'name'>;
 

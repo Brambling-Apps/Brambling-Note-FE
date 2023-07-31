@@ -4,13 +4,13 @@ import {
   useTheme, useMediaQuery, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button,
   Stack,
 } from '@mui/material';
-import { ErrorMessage, NewPassword, SnackbarMessage } from '../types';
+import { ErrorMessage, SnackbarMessage, User } from '../types';
 import { toErrorMessage } from '../utils';
 
 type Props = {
   display: boolean,
   hideDialog: () => void,
-  editPassword: (arg: NewPassword) => Promise<void>,
+  editPassword: (newPassword: string) => Promise<User>,
   setSnackbar: SnackbarMessage,
   setErrorMessage: (message: ErrorMessage) => void,
 };
@@ -18,7 +18,6 @@ type Props = {
 export default function EditPassword({
   display, hideDialog, editPassword, setSnackbar, setErrorMessage,
 }: Props) {
-  const [password, setPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [wrongPwdText, setWrongPwdText] = useState<string | null>(null);
@@ -27,7 +26,6 @@ export default function EditPassword({
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleExit = () => {
-    setPassword('');
     setNewPassword('');
     setConfirmPassword('');
     setWrongPwdText(null);
@@ -43,7 +41,7 @@ export default function EditPassword({
       return;
     }
 
-    editPassword({ password, newPassword })
+    editPassword(newPassword)
       .then(() => {
         handleExit();
         setSnackbar('密码修改成功。', null);
@@ -77,16 +75,6 @@ export default function EditPassword({
       <form onSubmit={onSubmit}>
         <DialogContent>
           <Stack spacing={2}>
-            <TextField
-              color="primary"
-              variant="standard"
-              margin="dense"
-              fullWidth
-              label="旧密码"
-              type="password"
-              value={password}
-              onChange={({ target }) => setPassword(target.value)}
-            />
             <TextField
               color="primary"
               variant="standard"

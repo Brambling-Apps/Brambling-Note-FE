@@ -20,16 +20,27 @@ const parseBoolean = (bool: unknown): boolean => {
   }
 };
 
-type Fields = { id: unknown, email: unknown, name: unknown, token: unknown, verified: unknown };
+const parseDate = (date: unknown): Date => {
+  const dateString = parseString('date', date);
+  return new Date(dateString);
+};
+
+type Fields = {
+  id: unknown,
+  email: unknown,
+  name: unknown,
+  verified: unknown,
+  lastVerificationEmail: unknown
+};
 
 export const toUser = ({
-  id, email, name, token, verified,
+  id, email, name, verified, lastVerificationEmail,
 }: Fields): User => ({
   id: parseString('id', id),
   email: parseString('email', email),
   name: parseString('name', name),
-  token: parseString('token', token),
   verified: parseBoolean(verified),
+  lastVerificationEmail: parseDate(lastVerificationEmail),
 });
 
 export const toErrorMessage = (error: Error): ErrorMessage => (

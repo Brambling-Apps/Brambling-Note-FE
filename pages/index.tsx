@@ -8,11 +8,10 @@ import { zhCN } from '@mui/material/locale';
 
 import Head from 'next/head';
 import {
-  ErrorMessage, LoginUser, NewNote, NewPassword, NewUser, Note, SnackbarMessage, User,
+  ErrorMessage, LoginUser, NewNote, NewUser, Note, SnackbarMessage, User,
 } from './types';
 import loginService from './services/login';
 import userService from './services/user';
-import emailService from './services/email';
 import noteService from './services/note';
 import { toErrorMessage, toUser } from './utils';
 
@@ -80,17 +79,16 @@ export default function Home() {
   };
 
   const handleRegister = (newUser: NewUser) => userService.create(newUser);
-  const getActivateState = (email: string) => userService.isVerified(email);
-  const resendVerifyEmail = (email: string) => emailService.resendVerify(email);
+  const getActivateState = () => userService.get().then((u) => u.verified);
+  const resendVerifyEmail = () => userService.sendVerifyEmail();
 
-  const handleEditPassword = async (newPassword: NewPassword) => {
+  const handleEditPassword = async (newPassword: string) => {
     if (!(user && user.email)) {
       // TODO: use constant instead of hard code
       throw new Error('User email is null');
     }
 
-    // TODO: possible to revoke json web token?
-    return userService.changePassword({ ...newPassword, email: user.email });
+    return userService.patch({ ...user, password: newPassword });
   };
 
   const handleNoteCreate = (newNote: NewNote) => (
