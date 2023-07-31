@@ -2,18 +2,16 @@
 const nextConfig = {
   reactStrictMode: true,
   skipTrailingSlashRedirect: true,
-  rewrites: async () => {
-    return [
-      {
-        source: '/api/:path*/',
-        destination: `http://localhost:9080/api/:path*/`,
-      },
-      {
-        source: '/api/:path*',
-        destination: `http://localhost:9080/api/:path*`,
-      },
-    ];
-  },
-}
+  rewrites: async () => [
+    {
+      source: '/api/:path*/',
+      destination: 'http://localhost:9080/api/:path*/',
+    },
+    {
+      source: '/api/:path*',
+      destination: 'http://localhost:9080/api/:path*',
+    },
+  ],
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
