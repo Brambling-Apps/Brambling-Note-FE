@@ -74,7 +74,7 @@ export default function Home() {
 
   const handleLogout = () => {
     localStorage.removeItem('user');
-    noteService.clearToken();
+    // TODO: logout session
     setUser(null);
   };
 
@@ -92,7 +92,7 @@ export default function Home() {
   };
 
   const handleNoteCreate = (newNote: NewNote) => (
-    noteService.add(newNote)
+    noteService.create(newNote)
       .then((returnedNote) => setNotes(notes.concat(returnedNote)))
   );
 
@@ -157,7 +157,6 @@ export default function Home() {
   useEffect(() => {
     if (user !== null) {
       localStorage.setItem('user', JSON.stringify(user));
-      noteService.setToken(user.token);
       noteService.getAll().then((n) => setNotes(n));
     } else {
       const cacheUser = localStorage.getItem('user');

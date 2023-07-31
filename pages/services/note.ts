@@ -1,55 +1,36 @@
 import axios from 'axios';
 import { NewNote, Note } from '../types';
 
-const baseUrl = '/api/notes';
-let token: string | null = null;
-type Config = { headers: { Authorization: string } };
-
-const setToken = (newToken: string) => {
-  token = `bearer ${newToken}`;
-};
-
-const clearToken = () => {
-  token = null;
-};
-
-const getConfig = (): Config => {
-  if (token === null) {
-    throw new TypeError('Token should not be null');
-  }
-
-  return { headers: { Authorization: token } };
-};
+axios.defaults.withCredentials = true;
+const baseUrl = '/api/notes/';
 
 const getAll = async () => {
-  const response = await axios.get<Note[]>(baseUrl, getConfig());
+  const response = await axios.get<Note[]>(baseUrl);
   return response.data;
 };
 
-const add = async (newNote: NewNote) => {
-  const response = await axios.post<Note>(baseUrl, newNote, getConfig());
+const create = async (newNote: NewNote) => {
+  const response = await axios.post<Note>(baseUrl, newNote);
   return response.data;
 };
 
 const update = async (id: string, newNote: NewNote) => {
-  const response = await axios.put<Note>(`${baseUrl}/${id}`, newNote, getConfig());
+  const response = await axios.put<Note>(`${baseUrl}${id}`, newNote);
   return response.data;
 };
 
 const remove = (id: string) => (
-  axios.delete<void>(`${baseUrl}/${id}`, getConfig())
+  axios.delete<void>(`${baseUrl}${id}`)
 );
 
 const undoRemove = async (id: string) => {
-  const respones = await axios.get<Note>(`${baseUrl}/undo-delete/${id}`, getConfig());
-  return respones.data;
+  const response = await axios.patch<Note>(`${baseUrl}undo-delete/${id}`);
+  return response.data;
 };
 
 export default {
-  setToken,
-  clearToken,
   getAll,
-  add,
+  create,
   update,
   remove,
   undoRemove,
