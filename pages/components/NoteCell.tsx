@@ -4,7 +4,7 @@ import Flag from '@mui/icons-material/Flag';
 import KeyboardArrowUp from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDown from '@mui/icons-material/KeyboardArrowDown';
 
-import { NewNote, Note } from '../types';
+import { NewNote, Note } from '@/utils/types';
 
 import NoteDetails from './NoteDetails';
 
@@ -18,11 +18,13 @@ type Props = {
 export default function NoteCell({
   note, updateNote, deleteNote, handleNoteError,
 }: Props) {
+  const [showDetails, setShowDetails] = useState(false);
+
   const {
     id, content, importance, date,
-  } = note;
-
-  const [showDetails, setShowDetails] = useState(false);
+  } = note || {
+    id: '', content: '', importance: false, date: (new Date()).toLocaleString(),
+  };
 
   const changeImportant = () => {
     updateNote(id, { content, importance: !importance })

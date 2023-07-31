@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { LoginUser, User } from '../types';
+import { LoginUser, User } from '@/utils/types';
 
 axios.defaults.withCredentials = true;
 const baseUrl = '/api/sessions/';

@@ -6,8 +6,8 @@ import {
 } from '@mui/material';
 import {
   ErrorMessage, NewUser, SnackbarMessage, User,
-} from '../types';
-import { toErrorMessage } from '../utils';
+} from '@/utils/types';
+import { toErrorMessage } from '@/utils/utils';
 
 type Props = {
   display: boolean,

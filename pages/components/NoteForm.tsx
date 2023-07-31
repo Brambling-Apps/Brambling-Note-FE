@@ -4,8 +4,8 @@ import {
   useMediaQuery, Switch, Stack,
 } from '@mui/material';
 
-import { ErrorMessage, NewNote } from '../types';
-import { toErrorMessage } from '../utils';
+import { ErrorMessage, NewNote } from '@/utils/types';
+import { toErrorMessage } from '@/utils/utils';
 
 type Props = {
   display: boolean,

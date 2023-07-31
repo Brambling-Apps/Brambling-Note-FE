@@ -3,8 +3,8 @@ import axios from 'axios';
 import {
   useTheme, useMediaQuery, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button,
 } from '@mui/material';
-import { ErrorMessage, LoginUser } from '../types';
-import { toErrorMessage } from '../utils';
+import { ErrorMessage, LoginUser } from '@/utils/types';
+import { toErrorMessage } from '@/utils/utils';
 
 type Props = {
   display: boolean,

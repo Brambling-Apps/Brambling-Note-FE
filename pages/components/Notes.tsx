@@ -7,10 +7,10 @@ import {
   SortDirection,
 } from '@mui/material';
 
-import { ErrorMessage, NewNote, Note } from '../types';
+import { ErrorMessage, NewNote, Note } from '@/utils/types';
+import { toErrorMessage } from '@/utils/utils';
 
 import NoteCell from './NoteCell';
-import { toErrorMessage } from '../utils';
 
 type Props = {
   notes: Note[],
@@ -26,7 +26,7 @@ const defaultHeads: HeadCell[] = [
 ];
 
 export default function Notes({
-  notes, updateNote, deleteNote, setErrorMessage,
+  notes = [], updateNote, deleteNote, setErrorMessage,
 }: Props) {
   const [sortedNotes, setSortedNotes] = useState(notes);
   const [headsCanBeSorted, setHeadsCanBeSorted] = useState<HeadCell[]>(defaultHeads);

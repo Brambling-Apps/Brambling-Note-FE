@@ -7,13 +7,13 @@ import { pink, indigo } from '@mui/material/colors';
 import { zhCN } from '@mui/material/locale';
 
 import Head from 'next/head';
+import sessionService from '@/services/session';
+import userService from '@/services/user';
+import noteService from '@/services/note';
 import {
   ErrorMessage, LoginUser, NewNote, NewUser, Note, SnackbarMessage, User,
-} from './types';
-import sessionService from './services/session';
-import userService from './services/user';
-import noteService from './services/note';
-import { toErrorMessage, toUser } from './utils';
+} from '@/utils/types';
+import { toErrorMessage, toUser } from '@/utils/utils';
 
 import ApplicationBar from './components/ApplicationBar';
 import Login from './components/Login';
@@ -232,10 +232,12 @@ export default function Home() {
           />
 
           {/* TODO: abstract to show more type of message */}
-          <ErrorDialog
-            message={errorMessage}
-            hideDialog={() => setErrorMessage(null)}
-          />
+          {!message || (
+            <ErrorDialog
+              message={errorMessage}
+              hideDialog={() => setErrorMessage(null)}
+            />
+          )}
 
           <NoteForm
             display={showNoteForm}

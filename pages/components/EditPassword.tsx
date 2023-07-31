@@ -4,8 +4,8 @@ import {
   useTheme, useMediaQuery, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button,
   Stack,
 } from '@mui/material';
-import { ErrorMessage, SnackbarMessage, User } from '../types';
-import { toErrorMessage } from '../utils';
+import { ErrorMessage, SnackbarMessage, User } from '@/utils/types';
+import { toErrorMessage } from '@/utils/utils';
 
 type Props = {
   display: boolean,

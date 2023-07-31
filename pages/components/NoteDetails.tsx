@@ -6,7 +6,7 @@ import Share from '@mui/icons-material/Share';
 import Delete from '@mui/icons-material/Delete';
 import Done from '@mui/icons-material/Done';
 
-import { NewNote, Note } from '../types';
+import { NewNote, Note } from '@/utils/types';
 
 type Props = {
   display: boolean,
@@ -20,9 +20,9 @@ type Props = {
 export default function NoteDetails({
   display, hideDetails, note, updateNote, deleteNote, handleNoteError,
 }: Props) {
-  const { id, content } = note;
+  const [newContent, setNewContent] = useState('');
 
-  const [newContent, setNewContent] = useState(content);
+  const { id, content } = note || { id: '', content: '' };
 
   const onSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();

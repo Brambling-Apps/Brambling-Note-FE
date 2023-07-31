@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { NewNote, Note } from '../types';
+import { NewNote, Note } from '@/utils/types';
 
 axios.defaults.withCredentials = true;
 const baseUrl = '/api/notes/';
