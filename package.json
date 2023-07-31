@@ -6,7 +6,7 @@
     "dev": "cross-env PROFILE=dev next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "cross-env PROFILE=prod next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
