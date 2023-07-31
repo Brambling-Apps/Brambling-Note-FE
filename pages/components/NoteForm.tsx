@@ -14,7 +14,7 @@ type Props = {
   setErrorMessage: (errorMessage: ErrorMessage) => void,
 };
 
-const defaultNewNote = { content: '', important: false };
+const defaultNewNote = { content: '', importance: false };
 
 export default function NoteForm({
   display, createNote, hideDialog, setErrorMessage,
@@ -59,12 +59,12 @@ export default function NoteForm({
             <FormControlLabel
               control={(
                 <Switch
-                  checked={newNote.important}
-                  onChange={() => setNewNote({ ...newNote, important: !newNote.important })}
+                  checked={newNote.importance}
+                  onChange={() => setNewNote({ ...newNote, importance: !newNote.importance })}
                 />
               )}
               label="重要"
-              aria-checked={newNote.important}
+              aria-checked={newNote.importance}
             />
           </Stack>
         </DialogContent>

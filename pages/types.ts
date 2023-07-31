@@ -24,7 +24,7 @@ export type LoginUser = Omit<NewUser, 'name'>;
 export interface Note {
   id: string;
   content: string;
-  important: boolean;
+  importance: boolean;
   date: string;
   user: User;
 }

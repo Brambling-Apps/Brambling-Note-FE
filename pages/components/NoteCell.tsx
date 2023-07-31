@@ -19,13 +19,13 @@ export default function NoteCell({
   note, updateNote, deleteNote, handleNoteError,
 }: Props) {
   const {
-    id, content, important, date,
+    id, content, importance, date,
   } = note;
 
   const [showDetails, setShowDetails] = useState(false);
 
   const changeImportant = () => {
-    updateNote(id, { ...note, important: !important })
+    updateNote(id, { content, importance: !importance })
       .catch((error) => handleNoteError(error, '编辑'));
   };
 
@@ -44,10 +44,10 @@ export default function NoteCell({
           <IconButton
             size="small"
             aria-label="重要标记"
-            aria-checked={important}
+            aria-checked={importance}
             onClick={changeImportant}
           >
-            {important
+            {importance
               ? <Flag color="secondary" />
               : <Flag />}
           </IconButton>

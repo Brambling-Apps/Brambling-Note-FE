@@ -87,15 +87,15 @@ export default function Notes({
         case 'important':
           setSortedNotes(
             ([] as Note[]).concat(notes).sort((a, b) => {
-              if (a.important === b.important) {
+              if (a.importance === b.importance) {
                 return 0;
               }
 
               if (condition.direction === 'asc') {
-                return a.important ? 1 : -1;
+                return a.importance ? 1 : -1;
               }
 
-              return a.important ? -1 : 1;
+              return a.importance ? -1 : 1;
             }),
 
             // This API is too new to use for Typescript

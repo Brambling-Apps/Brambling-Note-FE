@@ -30,7 +30,7 @@ export default function NoteDetails({
     if (newContent === content) {
       hideDetails();
     } else {
-      updateNote(id, { ...note, content: newContent })
+      updateNote(id, { importance: note.importance, content: newContent })
         .then(() => hideDetails())
         .catch((error: Error) => handleNoteError(error, '修改'));
     }
