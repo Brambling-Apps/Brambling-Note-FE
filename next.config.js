@@ -16,8 +16,8 @@ const nextConfig = {
       console.log(
         'Rewrites from env:',
         process.env.PROFILE === 'dev'
-          ? JSON.parse(process.env.REWRITES_DEV)
-          : JSON.parse(process.env.REWRITES_PROD),
+          ? process.env.REWRITES_DEV
+          : process.env.REWRITES_PROD,
       );
       return [];
     }
