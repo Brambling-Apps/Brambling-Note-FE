@@ -1,15 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  skipTrailingSlashRedirect: true,
   rewrites: async () => {
-    return {
-        fallback: [
-            {
-                source: '/:path*',
-                destination: `http://localhost:3003/:path*`,
-            },
-        ],
-    };
+    return [
+      {
+        source: '/api/:path*/',
+        destination: `http://localhost:9080/api/:path*/`,
+      },
+      {
+        source: '/api/:path*',
+        destination: `http://localhost:9080/api/:path*`,
+      },
+    ];
   },
 }
 
