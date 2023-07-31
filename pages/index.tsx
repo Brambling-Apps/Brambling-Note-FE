@@ -10,7 +10,7 @@ import Head from 'next/head';
 import {
   ErrorMessage, LoginUser, NewNote, NewUser, Note, SnackbarMessage, User,
 } from './types';
-import loginService from './services/login';
+import sessionService from './services/session';
 import userService from './services/user';
 import noteService from './services/note';
 import { toErrorMessage, toUser } from './utils';
@@ -67,15 +67,16 @@ export default function Home() {
     setSnackbarActionUndo(actionUndo);
   };
 
-  const handleLogin = (loginUser: LoginUser) => (
-    loginService.login(loginUser)
+  const handleLogin = (credentials: LoginUser) => (
+    sessionService.login(credentials)
       .then((u) => setUser(u))
   );
 
   const handleLogout = () => {
     localStorage.removeItem('user');
-    // TODO: logout session
-    setUser(null);
+    sessionService.logout().then(() => {
+      setUser(null);
+    });
   };
 
   const handleRegister = (newUser: NewUser) => userService.create(newUser);
