@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "cross-env PROFILE=dev next dev",
-    "build": "next build",
+    "build": "cross-env PROFILE=prod next build",
     "start": "cross-env PROFILE=prod next start",
     "lint": "next lint"
   },
