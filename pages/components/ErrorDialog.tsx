@@ -38,7 +38,7 @@ export default function ErrorDialog({ message, hideDialog }: Props) {
     <Dialog
       fullWidth
       maxWidth="sm"
-      open={!message}
+      open={!!message}
       TransitionProps={{
         onEnter: initializeDividers,
       }}

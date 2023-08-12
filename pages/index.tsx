@@ -231,12 +231,10 @@ export default function Home() {
         />
 
         {/* TODO: abstract to show more type of message */}
-        {!message || (
-          <ErrorDialog
-            message={errorMessage}
-            hideDialog={() => setErrorMessage(null)}
-          />
-        )}
+        <ErrorDialog
+          message={errorMessage}
+          hideDialog={() => setErrorMessage(null)}
+        />
 
         <NoteForm
           display={showNoteForm}
